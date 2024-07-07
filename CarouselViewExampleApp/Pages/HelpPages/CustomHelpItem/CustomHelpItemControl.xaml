@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             HorizontalOptions="Fill"
+             VerticalOptions="Center"             
+             x:Class="CarouselViewExampleApp.Pages.Views.Controls.CustomHelpItem.CustomHelpItemControl"
+             x:Name="ThisControl">
+    
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="GradientBorderStyle" TargetType="Border">
+                <Setter Property="HeightRequest" Value="0.5"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="Stroke" Value="Transparent"/>
+                <Setter Property="StrokeThickness" Value="0"/>
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="Transparent" Offset="0.0"/>
+                            <GradientStop Color="#BEBEBE" Offset="0.5"/>
+                            <GradientStop Color="Transparent" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="MiddleBorderStyle" TargetType="Border">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="Stroke" Value="Transparent"/>
+                <Setter Property="StrokeThickness" Value="0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Grid HeightRequest="50">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource GradientBorderStyle}" />
+
+        <Border Grid.Row="1" Style="{StaticResource MiddleBorderStyle}">
+            <Grid x:Name="HelpItemGrid">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnGridTapped"/>
+                </Grid.GestureRecognizers>
+                
+                <!-- Help Topic -->
+                <Grid ColumnDefinitions="*, Auto" ZIndex="1">
+                    <Label Grid.Column="0"
+                           Text="{Binding HelpTopic, Source={x:Reference Name=ThisControl}}"
+                           FontSize="14"
+                           LineBreakMode="WordWrap"
+                           HorizontalOptions="Start"
+                           VerticalOptions="CenterAndExpand"
+                           Margin="15, 0, 0, 0" />
+
+                    <!-- ">" -->
+                    <Label Grid.Column="1"
+                           Text=">"
+                           Background="Transparent"
+                           FontSize="16" 
+                           HorizontalOptions="End" 
+                           VerticalOptions="Center"
+                           Margin="0, 0, 15, 0" />
+                </Grid>
+            </Grid>
+            
+        </Border>
+
+        <Border Grid.Row="2" Style="{StaticResource GradientBorderStyle}" />
+
+    </Grid>
+
+
+</ContentView>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="CarouselViewExampleApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:CarouselViewExampleApp.Pages"
+    xmlns:loc="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:local="clr-namespace:CarouselViewExampleApp"
+    Shell.FlyoutBehavior="Flyout">
+
+    
+    <Shell.FlyoutHeader>
+        <Grid HeightRequest="150">
+            <Image Source="background.png" Aspect="AspectFill"/>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    
+    
+    <Shell.FlyoutBackground>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="{StaticResource Gray200}" Offset="0.0" />
+            <GradientStop Color="White" Offset="0.5" />
+        </LinearGradientBrush>
+    </Shell.FlyoutBackground>
+
+    
+
+    <FlyoutItem FlyoutIcon="dotnet_bot.png" Title="Home" FlyoutDisplayOptions="AsSingleItem">
+        <ShellContent Icon="dotnet_bot.png" Title="Calculate}" ContentTemplate="{DataTemplate pages:MainPage}" Route="MainPage" Shell.PresentationMode="Animated" />
+    </FlyoutItem>
+
+    <FlyoutItem FlyoutIcon="dotnet_bot.png" Title="Help" FlyoutDisplayOptions="AsSingleItem">
+        <ShellContent Icon="dotnet_bot.png" Title="Help" ContentTemplate="{DataTemplate pages:Help}" Route="Help" Shell.PresentationMode="Animated" IsVisible="True"/>
+    </FlyoutItem>
+
+    
+    
+    <Shell.FlyoutFooter>
+        <Grid HeightRequest="60" BackgroundColor="{StaticResource Gray900}">
+            <Label TextColor="White" Text="Copyright" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </Grid>
+    </Shell.FlyoutFooter>
+
+</Shell>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:loc="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+             xmlns:viewModels="clr-namespace:CarouselViewExampleApp.ViewModels"
+             x:DataType="viewModels:ManageItemsHelpPageViewModel"
+             x:Class="CarouselViewExampleApp.Pages.HelpPages.ManageItemsHelpPage"
+             Title="Help topic Manage Items"
+             x:Name="This">
+
+    <ContentPage.BindingContext>
+        <viewModels:ManageItemsHelpPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BorderStyleView" TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource White}" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 10, 10, 10, 10" />
+                <Setter Property="Margin" Value="15" />
+                <Setter Property="Opacity" Value="0.6" />
+                <Setter Property="Padding" Value="0" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Image ZIndex="1" Source="help_page.jpg" Aspect="AspectFill" VerticalOptions="FillAndExpand"/>
+
+        <Grid ZIndex="2">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="White" Offset="0.0" />
+                    <GradientStop Color="Transparent" Offset="1.0" />
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+
+        <Grid ZIndex="3">
+            <Border x:Name="HelpPageBorder" VerticalOptions="FillAndExpand" Style="{StaticResource BorderStyleView}" SizeChanged="HelpPageBorder_SizeChanged"/>
+
+            <Grid RowDefinitions="*, Auto" BackgroundColor="Transparent" Padding="15">
+                <ScrollView Grid.Row="0" Orientation="Vertical" HeightRequest="{Binding Source={x:Reference This}, Path=CarouselViewItemHeight}" WidthRequest="{Binding Source={x:Reference This}, Path=CarouselViewItemWidth}" VerticalOptions="Start" HorizontalOptions="Center" Margin="0, 0, 0, 25">
+                    <Grid Background="Aqua" HorizontalOptions="CenterAndExpand">
+                        <CarouselView x:Name="carouselView" Background="Transparent" ItemsSource="{Binding Items}" Loop="False" IsBounceEnabled="False" IndicatorView="indicatorView" VerticalOptions="Start">
+                            <CarouselView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" SnapPointsType="MandatorySingle" SnapPointsAlignment="Start" />
+                            </CarouselView.ItemsLayout>
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate x:DataType="viewModels:CarouselItem">
+                                    <StackLayout>
+                                        <Frame x:Name="SquareContainer" CornerRadius="20" Background="Green" HasShadow="False" Margin="20, 20, 20, 0" Padding="5, 5, 5, 5" SizeChanged="MaxSizeAspectRatioContainer_SizeChanged">
+                                            <Image Source="{Binding Image}" Aspect="AspectFit" IsAnimationPlaying="True" />
+                                        </Frame>
+                                        <StackLayout Background="Red" Margin="10">
+                                            <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="22" HorizontalOptions="CenterAndExpand" />
+                                            <Label Text="{Binding Description}" FontSize="16" HorizontalOptions="CenterAndExpand" Margin="10" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                    </Grid>
+                </ScrollView>
+
+                <IndicatorView x:Name="indicatorView" Grid.Row="1" IndicatorColor="LightGray" SelectedIndicatorColor="DarkGray" IndicatorsShape="Circle" HorizontalOptions="Center" VerticalOptions="End" Margin="0, 0, 0, 25" />
+            </Grid>
+        </Grid>
+    </Grid>
+
+
+</ContentPage>
